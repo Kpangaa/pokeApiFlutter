@@ -78,48 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: SafeArea(
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          color: pokedex?[index]['type'][0] ==
-                                                  "Grass"
-                                              ? Colors.greenAccent
-                                              : pokedex?[index]['type'][0] ==
-                                                      "Fire"
-                                                  ? Colors.redAccent
-                                                  : pokedex?[index]['type']
-                                                              [0] ==
-                                                          "Water"
-                                                      ? Colors.blue
-                                                      : pokedex?[index]['type']
-                                                                  [0] ==
-                                                              "Poison"
-                                                          ? Colors
-                                                              .deepPurpleAccent
-                                                          : pokedex?[index]
-                                                                          ['type']
-                                                                      [0] ==
-                                                                  "Electric"
-                                                              ? Colors.amber
-                                                              : pokedex?[index]
-                                                                              ['type']
-                                                                          [0] ==
-                                                                      "Rock"
-                                                                  ? Colors.grey
-                                                                  : pokedex?[index]['type'][0] ==
-                                                                          "Ground"
-                                                                      ? Colors
-                                                                          .brown
-                                                                      : pokedex?[index]['type'][0] ==
-                                                                              "Psychic"
-                                                                          ? Colors.indigo
-                                                                          : pokedex?[index]['type'][0] == "Fighting"
-                                                                              ? Colors.orange
-                                                                              : pokedex?[index]['type'][0] == "Bug"
-                                                                                  ? Colors.lightGreenAccent
-                                                                                  : pokedex?[index]['type'][0] == "Ghost"
-                                                                                      ? Colors.deepPurple
-                                                                                      : pokedex?[index]['type'][0] == "Normal"
-                                                                                          ? Colors.black26
-                                                                                          : Colors.pink,
-                                          borderRadius: const BorderRadius.all(Radius.circular(25))),
+                                          color: returnColorClass(
+                                              pokedex?[index]['type'][0]),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(25))),
                                       child: Stack(
                                         children: [
                                           Positioned(
@@ -211,46 +173,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   heroTag: index,
                                                   pokemonDetail:
                                                       pokedex?[index],
-                                                  color: pokedex?[index]['type']
-                                                              [0] ==
-                                                          "Grass"
-                                                      ? Colors.greenAccent
-                                                      : pokedex?[index]['type']
-                                                                  [0] ==
-                                                              "Fire"
-                                                          ? Colors.redAccent
-                                                          : pokedex?[index]
-                                                                          ['type']
-                                                                      [0] ==
-                                                                  "Water"
-                                                              ? Colors.blue
-                                                              : pokedex?[index]
-                                                                              ['type']
-                                                                          [0] ==
-                                                                      "Poison"
-                                                                  ? Colors
-                                                                      .deepPurpleAccent
-                                                                  : pokedex?[index]['type'][0] ==
-                                                                          "Electric"
-                                                                      ? Colors
-                                                                          .amber
-                                                                      : pokedex?[index]['type'][0] ==
-                                                                              "Rock"
-                                                                          ? Colors
-                                                                              .grey
-                                                                          : pokedex?[index]['type'][0] == "Ground"
-                                                                              ? Colors.brown
-                                                                              : pokedex?[index]['type'][0] == "Psychic"
-                                                                                  ? Colors.indigo
-                                                                                  : pokedex?[index]['type'][0] == "Fighting"
-                                                                                      ? Colors.orange
-                                                                                      : pokedex?[index]['type'][0] == "Bug"
-                                                                                          ? Colors.lightGreenAccent
-                                                                                          : pokedex?[index]['type'][0] == "Ghost"
-                                                                                              ? Colors.deepPurple
-                                                                                              : pokedex?[index]['type'][0] == "Normal"
-                                                                                                  ? Colors.white70
-                                                                                                  : Colors.pink,
+                                                  color: returnColorClass(
+                                                      pokedex?[index]['type']
+                                                          [0]),
                                                 )));
                                   },
                                 ),
@@ -280,10 +205,31 @@ class _HomeScreenState extends State<HomeScreen> {
         var data = jsonDecode(value.body);
         pokedex = data['pokemon'];
         setState(() {});
-        print(pokedex?[0]);
       }
     }).catchError((e) {
       print(e);
     });
+  }
+
+  returnColorClass(String type) {
+    Map mappingColorType = {
+      "Grass": Colors.greenAccent,
+      "Fire": Colors.redAccent,
+      "Water": Colors.blue,
+      "Poison": Colors.deepPurpleAccent,
+      "Electric": Colors.amber,
+      "Rock": Colors.grey,
+      "Ground": Colors.brown,
+      "Psychic": Colors.indigo,
+      "Fighting": Colors.orange,
+      "Bug": Colors.lightGreenAccent,
+      "Ghost": Colors.deepPurple,
+      "Normal": const Color(0xffe0e0e0),
+    };
+    if (mappingColorType[type] != null) {
+      return mappingColorType[type];
+    } else {
+      return Colors.pink;
+    }
   }
 }

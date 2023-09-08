@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class DetailScreen extends StatefulWidget {
   final heroTag;
   final pokemonDetail;
-  final Color color;
+  final color;
 
   const DetailScreen({this.heroTag, this.pokemonDetail, required this.color})
       : super();
@@ -17,7 +17,10 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    // para acceder a las props, con widget
     print(widget.pokemonDetail);
+    print(widget.color);
+    print(widget.heroTag);
   }
 
   @override
